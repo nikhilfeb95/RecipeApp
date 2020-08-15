@@ -41,7 +41,15 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
+	annotationProcessor('org.projectlombok:lombok')
 }
+
+tasks.withType(Test){
+	scanForTestClasses = false
+	include "**/*Test.class"
+}
+
+
 
 //export test coverage
 jacocoTestReport {

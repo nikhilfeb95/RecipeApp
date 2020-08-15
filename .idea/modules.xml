@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring5-mongo-recipe-app.iml" filepath="$PROJECT_DIR$/.idea/spring5-mongo-recipe-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring5-mongo-recipe-app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring5-mongo-recipe-app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring5-mongo-recipe-app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring5-mongo-recipe-app.test.iml" />
+    </modules>
+  </component>
+</project>

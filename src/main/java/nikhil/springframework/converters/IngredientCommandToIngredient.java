@@ -27,7 +27,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
         }
 
         final Ingredient ingredient = new Ingredient();
-        ingredient.setId(source.getId());
+        //ingredient.setId(source.getId());  removing this as the ingredient domain generates the id
 
         if(source.getRecipeId() != null){
             Recipe recipe = new Recipe();

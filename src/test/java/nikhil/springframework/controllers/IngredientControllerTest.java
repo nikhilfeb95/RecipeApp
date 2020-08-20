@@ -3,6 +3,7 @@ package nikhil.springframework.controllers;
 import nikhil.springframework.commands.IngredientCommand;
 import nikhil.springframework.commands.RecipeCommand;
 import nikhil.springframework.commands.UnitOfMeasureCommand;
+import nikhil.springframework.domain.Recipe;
 import nikhil.springframework.domain.UnitOfMeasure;
 import nikhil.springframework.services.IngredientService;
 import nikhil.springframework.services.RecipeService;
@@ -88,6 +89,7 @@ public class IngredientControllerTest {
         recipeCommand.setId("1");
 
         //when
+        when(recipeService.findById(anyString())).thenReturn(Mono.just(new Recipe()));
         when(recipeService.findCommandById(anyString())).thenReturn(Mono.just(recipeCommand));
         when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
 

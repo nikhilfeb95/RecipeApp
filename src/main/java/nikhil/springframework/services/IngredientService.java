@@ -1,6 +1,7 @@
 package nikhil.springframework.services;
 
 import nikhil.springframework.commands.IngredientCommand;
+import nikhil.springframework.domain.Recipe;
 import reactor.core.publisher.Mono;
 
 /**
@@ -12,5 +13,5 @@ public interface IngredientService {
 
     Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command);
 
-    Mono<Void> deleteById(String recipeId, String idToDelete);
+    Mono<Recipe> deleteById(String recipeId, String idToDelete);
 }

@@ -52,7 +52,6 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    @Transactional
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
         Recipe recipe = recipeReactiveRepository.findById(command.getRecipeId()).block();
 
@@ -106,31 +105,26 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Mono<Void> deleteById(String recipeId, String idToDelete) {
-
-        log.debug("Deleting ingredient: " + recipeId + ":" + idToDelete);
-
-        Recipe recipe = recipeReactiveRepository.findById(recipeId).block();
-
-        if(recipe != null){
-            log.debug("found recipe");
-
-            Optional<Ingredient> ingredientOptional = recipe
-                    .getIngredients()
-                    .stream()
-                    .filter(ingredient -> ingredient.getId().equals(idToDelete))
-                    .findFirst();
-
-            if(ingredientOptional.isPresent()){
-                log.debug("found Ingredient");
-                Ingredient ingredientToDelete = ingredientOptional.get();
-               // ingredientToDelete.setRecipe(null);
-                recipe.getIngredients().remove(ingredientOptional.get());
-                recipeReactiveRepository.save(recipe).block();
-            }
-        } else {
-            log.debug("Recipe Id Not found. Id:" + recipeId);
-        }
-        return Mono.empty();
+    public Mono<Recipe> deleteById(String recipeId, String idToDelete) {
+        //completely reactive function
+        log.info("in the delete method");
+        return recipeReactiveRepository.findById(recipeId)
+                .flatMap(recipe -> {
+                    Optional<Ingredient> ingredientOptional = recipe
+                            .getIngredients()
+                            .stream()
+                            .filter(ingredient -> ingredient.getId().equals(idToDelete))
+                            .findFirst();
+                    if(ingredientOptional.isPresent()){
+                        log.debug("found Ingredient");
+                        recipe.getIngredients().remove(ingredientOptional.get());
+                        System.out.println("Found the data");
+                        return recipeReactiveRepository.save(recipe);
+                    }
+                    else{
+                        log.debug("ingredient not found");
+                        return Mono.empty();
+                    }
+                });
     }
 }
